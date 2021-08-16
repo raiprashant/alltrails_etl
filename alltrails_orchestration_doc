@@ -1,0 +1,11 @@
+orchestration documentation
+
+to run the job end to end on a daily basis in a AWS enviornment, we can do the following steps:
+
+1) create s3 buckets for raw data where users and recordings file will land.
+2) s3 folder structure for users file can be like s3://alltrails/raw_files/users/users_YYYYMMDD.tsv
+3) s3 folder structure for recordings file can be like s3://alltrails/raw_files/recordings/users_YYYYMMDD.tsv
+4) in alltrails dataset code we can use boto3 library to connect to AWS s3 where we can list the bucket and the file path and use file mask to read files
+5) we can upload the output file in s3://alltrails/output_files/final_dataset_YYYYMMDD.tsv
+6) once uploaded we can use copy command to load data in Redshift table
+7) once the data is loaded in redshift we can move the raw files from raw bucket to archive bucket. For example s3://alltrails/raw_files/users/users_YYYYMMDD.tsv to s3://alltrails/archive_files/users/users_YYYYMMDD.tsv
